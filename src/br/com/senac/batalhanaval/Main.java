@@ -3,6 +3,7 @@ package br.com.senac.batalhanaval;
 import java.util.Scanner;
 
 public class Main {
+    public static final Scanner ENTRADA = new Scanner(System.in);
 
     public static void logoJogo(){
 
@@ -26,7 +27,6 @@ public class Main {
     }
 
     public static void espacamento(){
-
         for(int i = 0; i < 5; i++){
             System.out.println();
         }
@@ -41,23 +41,17 @@ public class Main {
     }
 
     public static int entradaMenu(){
-        Scanner entrada = new Scanner(System.in);
         System.out.print("                                                                                                        Qual opção: ");
-        return entrada.nextInt();
+        return ENTRADA.nextInt();
     }
 
     public static void limparPagina(){
-
         for(int i = 0; i<50;++i){
-
             System.out.println();
-
         }
-
     }
 
     public static String[][] criarTabuleiro(){
-
         String[][] tabuleiro = new String[11][11];
 
         tabuleiro[0][0] = " X";
@@ -75,13 +69,9 @@ public class Main {
         tabuleiro[9][0] = " 9"; tabuleiro[10][0] = "10";
 
         for(int i = 1; i < 11; i++){
-
             for(int j = 1; j < 11; j++){
-
                 tabuleiro[i][j] = "~";
-
             }
-
         }
 
         return tabuleiro;
@@ -90,16 +80,12 @@ public class Main {
     public static void exibirTabuleiro(String[][] alimentarTabuleiro){
 
         for(int i = 0; i < 11; i++){
-
             for(int j = 0; j < 11; j++){
-
                 System.out.print(" " + alimentarTabuleiro[i][j]);
                 System.out.print("  ");
-
             }
 
             System.out.println();
-
         }
 
     }
@@ -119,14 +105,11 @@ public class Main {
     }
 
     public static int entradaPosicaoNavio(){
-
         int direcao = 0;
 
         do {
-
-            Scanner entrada = new Scanner(System.in);
             System.out.print("Qual opção: ");
-            direcao = entrada.nextInt();
+            direcao = ENTRADA.nextInt();
 
             if(direcao < 1 || direcao > 2){
 
@@ -137,33 +120,26 @@ public class Main {
         }while(direcao < 1 || direcao > 2);
 
         return direcao;
-
     }
 
 
 
     public static int entradaNavioUsado(){
-
-        Scanner entrada = new Scanner(System.in);
-
         System.out.println("Qual posicionara primeiro? ");
 
-        return entrada.nextInt();
+        return ENTRADA.nextInt();
     }
 
     public static int navioUsado(int[] limiteNavios){
-
-        Scanner entrada = new Scanner(System.in);
         int tamanho = 0;
         boolean escolhaValida = false;
 
         while (!escolhaValida) {
             System.out.print("Qual navio posicionara agora (1 a 4)? ");
-            int opcao = entrada.nextInt();
+            int opcao = ENTRADA.nextInt();
 
 
             if (opcao >= 1 && opcao <= 4) {
-
                 if (limiteNavios[opcao] > 0) {
                     limiteNavios[opcao]--;
                     escolhaValida = true;
@@ -182,21 +158,18 @@ public class Main {
         }
 
         return tamanho;
-
     }
 
     public static String[][] entradaPosicaoNavio(String [][] tabuleiro, int tamanho, int direcao){
-        Scanner entrada = new Scanner(System.in);
         int linha = 0;
         int coluna = 0;
         boolean posicaoFinalizada = false;
 
         while (!posicaoFinalizada) {
-
             boolean colunaValida = false;
             while (!colunaValida) {
                 System.out.print("Digite a Coluna (A-J): ");
-                String colunaLetra = entrada.next().toUpperCase();
+                String colunaLetra = ENTRADA.next().toUpperCase();
 
                 switch (colunaLetra) {
                     case "A":
@@ -246,7 +219,7 @@ public class Main {
             boolean linhaValida = false;
             while (!linhaValida) {
                 System.out.print("Digite a linha (1-10): ");
-                linha = entrada.nextInt();
+                linha = ENTRADA.nextInt();
 
                 if (linha >= 1 && linha <= 10) {
                     linhaValida = true;
@@ -313,58 +286,53 @@ public class Main {
 
 
     public static void main(String[] args) {
-
         int op1 = 0;
         int contadorNavios = 0;
 
-    do{
-        espacamento();
-        logoJogo();
-        espacamento();
-        menu();
-        int opcao = entradaMenu();
+        do{
+            espacamento();
+            logoJogo();
+            espacamento();
+            menu();
+            int opcao = entradaMenu();
 
-        switch (opcao) {
-            case 1:
-                limparPagina();
-                String[][] tabuleiro = criarTabuleiro();
-                exibirTabuleiro(tabuleiro);
-                espacamento();
-
-                int[] limiteNavios = {0, 1, 1, 2, 1};
-
-                do {
+            switch (opcao) {
+                case 1:
                     limparPagina();
+                    String[][] tabuleiro = criarTabuleiro();
                     exibirTabuleiro(tabuleiro);
                     espacamento();
 
-                    // Passamos o array para o menu e para a função de escolha
-                    menuPosicaoNavio(contadorNavios + 1, limiteNavios);
-                    int direcao = entradaPosicaoNavio();
+                    int[] limiteNavios = {0, 1, 1, 2, 1};
 
-                    // Passamos o estoque para descontar o navio escolhido
-                    int tamanho = navioUsado(limiteNavios);
+                    do {
+                        limparPagina();
+                        exibirTabuleiro(tabuleiro);
+                        espacamento();
 
-                    tabuleiro = entradaPosicaoNavio(tabuleiro, tamanho, direcao);
+                        // Passamos o array para o menu e para a função de escolha
+                        menuPosicaoNavio(contadorNavios + 1, limiteNavios);
+                        int direcao = entradaPosicaoNavio();
 
-                    contadorNavios++;
-                } while(contadorNavios != 5);
-                break;
-            case 2:
-            limparPagina();
+                        // Passamos o estoque para descontar o navio escolhido
+                        int tamanho = navioUsado(limiteNavios);
 
+                        tabuleiro = entradaPosicaoNavio(tabuleiro, tamanho, direcao);
 
-                break;
-            case 3:
-            limparPagina();
-              op1 = 3;
-
-              break;
-        }
-
-    }while(op1 != 3);
+                        contadorNavios++;
+                    } while(contadorNavios != 5);
+                    break;
+                case 2:
+                limparPagina();
 
 
+                    break;
+                case 3:
+                limparPagina();
+                  op1 = 3;
+
+                  break;
+            }
+        }while(op1 != 3);
     }
-
 }
