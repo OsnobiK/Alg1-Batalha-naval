@@ -226,16 +226,17 @@ public class Main {
             if (cabeEtaLivre) {
                 posicaoFinalizada = true;
                 if (direcao == 1) {
-                    for (int j = coluna; j < coluna + tamanho; j++){ 
+                    for (int j = coluna; j < coluna + tamanho; j++) {
                         tabuleiro[linha][j] = "N";
-                        }
-                }else {             
-                    for (int j = linha;  j < linha  + tamanho; j++) {
+                    }
+                } else {
+                    for (int j = linha; j < linha + tamanho; j++) {
                         tabuleiro[j][coluna] = "N";
+                    }
                 }
-            } else {
-                System.out.println("Por favor, escolha novas coordenadas.\n");
-            }
+            }else {
+                    System.out.println("Por favor, escolha novas coordenadas.\n");
+                }
         }
 
         espacamento();
