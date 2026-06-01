@@ -52,12 +52,26 @@ public class Main {
     public static String[][] criarTabuleiro() {
         String[][] tabuleiro = new String[11][11];
         tabuleiro[0][0] = " X";
-        tabuleiro[0][1]  = "A"; tabuleiro[0][2]  = "B"; tabuleiro[0][3]  = "C"; tabuleiro[0][4]  = "D";
-        tabuleiro[0][5]  = "E"; tabuleiro[0][6]  = "F"; tabuleiro[0][7]  = "G"; tabuleiro[0][8]  = "H";
-        tabuleiro[0][9]  = "I"; tabuleiro[0][10] = "J";
-        tabuleiro[1][0]  = " 1"; tabuleiro[2][0]  = " 2"; tabuleiro[3][0]  = " 3"; tabuleiro[4][0]  = " 4";
-        tabuleiro[5][0]  = " 5"; tabuleiro[6][0]  = " 6"; tabuleiro[7][0]  = " 7"; tabuleiro[8][0]  = " 8";
-        tabuleiro[9][0]  = " 9"; tabuleiro[10][0] = "10";
+        tabuleiro[0][1]  = "A"; 
+        tabuleiro[0][2]  = "B"; 
+        tabuleiro[0][3]  = "C"; 
+        tabuleiro[0][4]  = "D";
+        tabuleiro[0][5]  = "E"; 
+        tabuleiro[0][6]  = "F"; 
+        tabuleiro[0][7]  = "G"; 
+        tabuleiro[0][8]  = "H";
+        tabuleiro[0][9]  = "I"; 
+        tabuleiro[0][10] = "J";
+        tabuleiro[1][0]  = " 1"; 
+        tabuleiro[2][0]  = " 2"; 
+        tabuleiro[3][0]  = " 3"; 
+        tabuleiro[4][0]  = " 4";
+        tabuleiro[5][0]  = " 5"; 
+        tabuleiro[6][0]  = " 6"; 
+        tabuleiro[7][0]  = " 7"; 
+        tabuleiro[8][0]  = " 8";
+        tabuleiro[9][0]  = " 9"; 
+        tabuleiro[10][0] = "10";
         for (int i = 1; i < 11; i++)
             for (int j = 1; j < 11; j++)
                 tabuleiro[i][j] = "~";
@@ -136,10 +150,17 @@ public class Main {
 
     public static int letraParaColuna(String letra) {
         switch (letra.toUpperCase()) {
-            case "A": return 1; case "B": return 2; case "C": return 3;
-            case "D": return 4; case "E": return 5; case "F": return 6;
-            case "G": return 7; case "H": return 8; case "I": return 9;
-            case "J": return 10; default: return -1;
+            case "A": return 1; 
+            case "B": return 2; 
+            case "C": return 3;
+            case "D": return 4; 
+            case "E": return 5; 
+            case "F": return 6;
+            case "G": return 7; 
+            case "H": return 8; 
+            case "I": return 9;
+            case "J": return 10; 
+            default: return -1;
         }
     }
 
@@ -204,8 +225,14 @@ public class Main {
 
             if (cabeEtaLivre) {
                 posicaoFinalizada = true;
-                if (direcao == 1) for (int j = coluna; j < coluna + tamanho; j++) tabuleiro[linha][j] = "N";
-                else              for (int j = linha;  j < linha  + tamanho; j++) tabuleiro[j][coluna] = "N";
+                if (direcao == 1) {
+                    for (int j = coluna; j < coluna + tamanho; j++){ 
+                        tabuleiro[linha][j] = "N";
+                        }
+                }else {             
+                    for (int j = linha;  j < linha  + tamanho; j++) {
+                        tabuleiro[j][coluna] = "N";
+                }
             } else {
                 System.out.println("Por favor, escolha novas coordenadas.\n");
             }
@@ -241,27 +268,24 @@ public class Main {
     }
 
 
-    // ATAQUE DO JOGADOR (PvP e PvE)
-
-
-    /*
-     * Lê coordenadas do jogador e ataca tabRealAdversario.
-     * Marca resultado em tabVisivelAtacante (o que o jogador vê).
-     * Retorna true se acertou.
-     */
+   
     public static boolean realizarAtaque(String[][] tabRealAdversario, String[][] tabVisivelAtacante) {
         int coluna = -1, linha = 0;
 
         while (coluna == -1) {
             System.out.print("Digite a Coluna para atacar (A-J): ");
             coluna = letraParaColuna(ENTRADA.next());
-            if (coluna == -1) System.out.println("Coluna inválida! Tente novamente.");
+            if (coluna == -1) {
+                System.out.println("Coluna inválida! Tente novamente.");
+            }
         }
 
         while (linha < 1 || linha > 10) {
             System.out.print("Digite a Linha para atacar (1-10): ");
             linha = ENTRADA.nextInt();
-            if (linha < 1 || linha > 10) System.out.println("Linha inválida! Tente novamente.");
+            if (linha < 1 || linha > 10) {
+                System.out.println("Linha inválida! Tente novamente.");
+            }
         }
 
         String posicao = tabVisivelAtacante[linha][coluna];
